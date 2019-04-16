@@ -1,0 +1,29 @@
+C:/Users/DES/Documents/GitHub/verilog_programminng_guide/sequential_logic/triggers/RS_trigger.v {1 {vlog -work metoda -nocovercells C:/Users/DES/Documents/GitHub/verilog_programminng_guide/sequential_logic/triggers/RS_trigger.v
+Model Technology ModelSim ALTERA vlog 6.5b Compiler 2009.10 Oct  1 2009
+-- Compiling module RS_trigger
+
+Top level modules:
+	RS_trigger
+
+} {} {}} C:/Users/DES/Documents/GitHub/verilog_programminng_guide/sequential_logic/triggers/JK_trigger.v {1 {vlog -work metoda -nocovercells C:/Users/DES/Documents/GitHub/verilog_programminng_guide/sequential_logic/triggers/JK_trigger.v
+Model Technology ModelSim ALTERA vlog 6.5b Compiler 2009.10 Oct  1 2009
+-- Compiling module JK_trigger
+
+Top level modules:
+	JK_trigger
+
+} {} {}} C:/Users/DES/Documents/GitHub/verilog_programminng_guide/sequential_logic/triggers/T_trigger.v {1 {vlog -work metoda -nocovercells C:/Users/DES/Documents/GitHub/verilog_programminng_guide/sequential_logic/triggers/T_trigger.v
+Model Technology ModelSim ALTERA vlog 6.5b Compiler 2009.10 Oct  1 2009
+-- Compiling module T_trigger
+
+Top level modules:
+	T_trigger
+
+} {} {}} C:/Users/DES/Documents/GitHub/verilog_programminng_guide/sequential_logic/triggers/D_trigger.v {1 {vlog -work metoda -nocovercells C:/Users/DES/Documents/GitHub/verilog_programminng_guide/sequential_logic/triggers/D_trigger.v
+Model Technology ModelSim ALTERA vlog 6.5b Compiler 2009.10 Oct  1 2009
+-- Compiling module D_trigger
+
+Top level modules:
+	D_trigger
+
+} {} {}}
