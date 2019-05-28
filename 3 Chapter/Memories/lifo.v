@@ -1,0 +1,88 @@
+module fifo_param
+    (
+        input wire              iclk,       // Signal declaration 
+        input wire              ireset, 
+        input wire              ird, 
+        input wire              iwr,
+        input wire  [15:0]      iw_data,
+        output wire             oempty,
+        output wire             ofull,
+        output wire [15:0]      or_data
+    );       
+
+    // Inner signal declaration
+    reg [15:0]          rArray [31:0];
+    reg [4:0]           rMem_ptr        = '0;
+    reg [4:0]           rMem_ptr_next_w = '0;
+    reg [4:0]           rMem_ptr_next_r = '0;
+    reg [4:0]           rMem_ptr_succ   = '0;
+
+    reg                 rFull;
+    reg                 rEmpty;
+    reg                 rFull_next;
+    reg                 rEmpty_next;
+
+    wire wWr_en;
+
+    // register file write operation
+    always @(posedge iclk)
+        if (wWr_en) rArray[rMem_ptr] <= iw_data;
+    // register file read operation
+    assign or_data = rArray[rMem_ptr];
+    // write enable if FIFO is not ful
+    assign wWr_en = iwr & ~rFull;
+
+    // FIFO controll logic 
+    always @(posedge iclk,posedge ireset) begin
+        if (ireset) begin
+            rMem_ptr <= 0;
+            rFull  <= 1'b0;
+            rEmpty <= 1'b1;
+        end 
+        else begin
+            rFull  <= rFull_next;
+            rEmpty <= rEmpty_next;
+        end
+    end
+
+    // next-state logic 
+    always @* begin
+        // successive pointer values 
+        rMem_ptr_succ = rMem_ptr + 1;
+        // default keep old values
+
+        rFull_next  = rFull;
+        rEmpty_next = rEmpty;
+        case ({iwr, ird})
+            //2'b00:
+            2'b01: begin  // read
+                if(~rEmpty) begin // not EMPTY
+                    rMem_ptr = rMem_ptr_next_r;
+                    rFull_next  = 1'b0;
+                    if (rR_ptr_succ == rW_ptr) begin
+                        rEmpty_next = 1'b1;
+                    end
+                end
+            end
+            2'b10: begin  // write
+                if (~rFull) begin // not FULL
+                    rW_ptr_next = rW_ptr_succ;
+                    rEmpty_next = 1'b0;
+                    if (rW_ptr_succ == rR_ptr) begin
+                       rFull_next = 1'b1; 
+                    end
+                end
+            end
+            2'b11: begin  // write and read
+                rW_ptr_next = rW_ptr_succ;
+                rR_ptr_next = rR_ptr_succ;
+            end 
+        endcase
+        
+    end
+
+    // output
+    assign ofull = rFull;
+    assign oempty = rEmpty;
+
+endmodule 
