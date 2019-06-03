@@ -3,7 +3,7 @@ module mux_if
         input   din_0 , // Первый вход мультиплексора
         input   din_1 , // Второй вход мультиплексора
         input   sel ,   // Выбор входа
-        output reg mux_out // Выход мультиплексора
+        output  mux_out // Выход мультиплексора
     );
     always @* begin
         if (sel == 1'b0) begin
